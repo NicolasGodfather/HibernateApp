@@ -1,0 +1,1 @@
+This is console app with hibernate framework also with mysql db, maven, log4j.
