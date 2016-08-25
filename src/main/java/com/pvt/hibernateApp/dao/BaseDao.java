@@ -1,7 +1,7 @@
 package com.pvt.hibernateApp.dao;
 
 import com.pvt.hibernateApp.dao.exceptions.DaoException;
-import com.pvt.hibernateApp.loader.DeveloperLoader;
+import com.pvt.hibernateApp.loader.PersonLoader;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class BaseDao<T> implements Dao<T> {
 
     public void saveOrUpdate(T t) throws DaoException {
         try {
-            Session session = DeveloperLoader.util.getSession();
+            Session session = PersonLoader.util.getSession();
             transaction = session.beginTransaction();
             session.saveOrUpdate(t);
             log.info("saveOrUpdate(t):" + t);
@@ -41,7 +41,7 @@ public class BaseDao<T> implements Dao<T> {
         log.info("Get class by id:" + id);
         T t = null;
         try {
-            Session session = DeveloperLoader.util.getSession();
+            Session session = PersonLoader.util.getSession();
             transaction = session.beginTransaction();
             t = (T) session.get(getPersistentClass(), id);
             transaction.commit();
@@ -58,7 +58,7 @@ public class BaseDao<T> implements Dao<T> {
         log.info("Load class by id:" + id);
         T t = null;
         try {
-            Session session = DeveloperLoader.util.getSession();
+            Session session = PersonLoader.util.getSession();
             transaction = session.beginTransaction();
             t = (T) session.load(getPersistentClass(), id);
             log.info("load() clazz:" + t);
@@ -74,7 +74,7 @@ public class BaseDao<T> implements Dao<T> {
 
     public void delete(T t) throws DaoException {
         try {
-            Session session = DeveloperLoader.util.getSession();
+            Session session = PersonLoader.util.getSession();
             transaction = session.beginTransaction();
             session.delete(t);
             transaction.commit();

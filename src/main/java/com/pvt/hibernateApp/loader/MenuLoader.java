@@ -10,9 +10,9 @@
  */
 package com.pvt.hibernateApp.loader;
 
-import com.pvt.hibernateApp.dao.DeveloperDao;
+import com.pvt.hibernateApp.dao.PersonDao;
 import com.pvt.hibernateApp.dao.exceptions.DaoException;
-import com.pvt.hibernateApp.pojos.Developer;
+import com.pvt.hibernateApp.pojos.Person;
 import org.apache.log4j.Logger;
 
 import java.util.Scanner;
@@ -20,10 +20,10 @@ import java.util.Scanner;
 public class MenuLoader {
     private static Logger log = Logger.getLogger(MenuLoader.class);
     public static Boolean needMenu = true;
-    private static DeveloperDao developerDao = null;
+    private static PersonDao personDao = null;
 
     public static void menu() throws DaoException {
-        Developer developer = null;
+        Person person = null;
         while (needMenu) {
             printMenu();
             Scanner scanner = new Scanner(System.in);
@@ -35,11 +35,11 @@ public class MenuLoader {
                     // Perform "original number" case.
                     break;
                 case 2:
-                    developer = findDeveloper();
+                    person = findDeveloper();
                     break;
                 case 3:
-                    developer = createPerson(developer);
-                    getDeveloperDao().saveOrUpdate(developer);
+                    person = createPerson(person);
+                    getPersonDao().saveOrUpdate(person);
                     break;
                 default:
                     needMenu = true;
@@ -53,87 +53,87 @@ public class MenuLoader {
         System.out.println(" Options:");
         System.out.println("        0. Exit");
         System.out.println("        1. Delete developer");
-        System.out.println("        2. Get Developer");
-        System.out.println("        3. Save or Update Developer");
+        System.out.println("        2. Get Person");
+        System.out.println("        3. Save or Update Person");
     }
 
-    public static Developer createPerson(Developer developer) {
-        System.out.println("Please enter developer description:");
+    public static Person createPerson(Person person) {
+        System.out.println("Please enter person description:");
         System.out.print("Name - ");
 
-        if(developer == null) {
-            developer = new Developer();}
+        if(person == null) {
+            person = new Person();}
         Scanner scanner = new Scanner(System.in);
         String parameter = scanner.nextLine();
-        developer.setName(parameter);
+        person.setName(parameter);
         System.out.print("Surname - ");
         parameter = scanner.nextLine();
-        developer.setSurname(parameter);
+        person.setSurname(parameter);
         System.out.print("Age - ");
-        developer.setAge(scanner.nextInt());
-//        developer.setPersonAddress(new Address());
-//        developer.getPersonAddress().setCity("Minsk");
-//        developer.getPersonAddress().setStreet("Gaya");
-        return developer;
+        person.setAge(scanner.nextInt());
+//        person.setPersonAddress(new Address());
+//        person.getPersonAddress().setCity("Minsk");
+//        person.getPersonAddress().setStreet("Gaya");
+        return person;
     }
 
-    public static Developer findDeveloper() {
-        System.out.println("Get by Id. Please enter developer id:");
+    public static Person findDeveloper() {
+        System.out.println("Get by Id. Please enter person id:");
         System.out.print("Id - ");
 
         Scanner scanner = new Scanner(System.in);
-        Developer developer = null;
+        Person person = null;
         Integer id = scanner.nextInt();
         try {
-            developer = getDeveloperDao().get(id);
+            person = getPersonDao().get(id);
         } catch (DaoException e) {
             log.error(e, e);
         } catch (NullPointerException e) {
-            log.error("Unable find developer:", e);
+            log.error("Unable find person:", e);
         }
-        System.out.print(developer);
-        return developer;
+        System.out.print(person);
+        return person;
     }
 
-    public static Developer loadDeveloper() {
-        System.out.println("Loag by Id. Please enter developer id:");
+    public static Person loadDeveloper() {
+        System.out.println("Loag by Id. Please enter person id:");
         System.out.print("Id - ");
 
         Scanner scanner = new Scanner(System.in);
-        Developer developer = null;
+        Person person = null;
         Integer id = scanner.nextInt();
         try {
-            developer = getDeveloperDao().get(id);
+            person = getPersonDao().get(id);
         } catch (DaoException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (NullPointerException e) {
-            log.error("Unable find developer:", e);
+            log.error("Unable find person:", e);
         }
-        System.out.print(developer);
-        return developer;
+        System.out.print(person);
+        return person;
     }
 
     public static void flushSession() {
-        System.out.println("Please enter developer id:");
+        System.out.println("Please enter person id:");
         System.out.print("Id - ");
         Scanner scanner = new Scanner(System.in);
-        Developer developer = null;
+        Person person = null;
         Integer id = scanner.nextInt();
         System.out.println("Please enter new Name:");
         System.out.print("New Name - ");
         scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         try {
-            getDeveloperDao().flush(id, name);
+            getPersonDao().flush(id, name);
         } catch (DaoException e) {
             log.error("Unable run flush example");
         }
     }
 
-    public static DeveloperDao getDeveloperDao () {
-        if (developerDao == null) {
-            developerDao = new DeveloperDao();
+    public static PersonDao getPersonDao () {
+        if (personDao == null) {
+            personDao = new PersonDao();
         }
-        return developerDao;
+        return personDao;
     }
 }

@@ -8,8 +8,8 @@ import java.util.Locale;
 
 import static com.pvt.hibernateApp.loader.MenuLoader.menu;
 
-public class DeveloperLoader {
-    private static Logger log = Logger.getLogger(DeveloperLoader.class);
+public class PersonLoader {
+    private static Logger log = Logger.getLogger(PersonLoader.class);
     public static HibernateUtil util = null;
 
     public static void main(String[] args) throws Exception {

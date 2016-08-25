@@ -27,7 +27,6 @@ public class HibernateUtil {
 
     private HibernateUtil() {
         try {
-            // change here
             Configuration config = new Configuration().configure();
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
                     applySettings(config.getProperties());

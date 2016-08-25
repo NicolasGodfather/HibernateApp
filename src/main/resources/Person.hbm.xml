@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.pvt.hibernateApp.dao" auto-import="false" catalog="dev">
-    <class name="com.pvt.hibernateApp.pojos.Developer" table="DEVELOPER">
-        <id name="id" type="int" column="F_ID">
+<hibernate-mapping package="com.pvt.hibernateApp.pojos" auto-import="false">
+    <class name="Person" table="PERSON">
+        <id name="id" type="long" column="F_ID">
             <generator class="increment"/>
         </id>
         <property name="name" column="F_NAME" type="string"/>
         <property name="surname" column="F_SURNAME" type="string"/>
         <property name="age" column="F_AGE" type="int"/>
+        <property name="cellphone" column="F_CELLPHONE" type="string"/>
+        <property name="email" column="F_EMAIL" type="string"/>
+        <subclass name="Employee" discriminator-value="E">
+            <property name="employeeId"/>
+            <property name="employeeDetail"/>
+        </subclass>
     </class>
 </hibernate-mapping>
 

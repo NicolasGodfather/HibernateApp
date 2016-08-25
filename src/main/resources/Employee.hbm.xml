@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.pvt.hibernateApp.pojos" auto-import="false">
+    <class name="Employee" table="EMPLOYEE" lazy="false">
+        <id name="id" type="long" column="F_ID">
+            <generator class="native">
+                <param name="sequence">T_PERSON_SEQ</param>
+            </generator>
+        </id>
+        <one-to-one name="employeeDetail" class="EmployeeDetail"/>
+        <one-to-one name="address" class="Address"/>
+    </class>
+</hibernate-mapping>
